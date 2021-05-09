@@ -1,0 +1,22 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+
+jobs:
+  build-and-test:
+    executor: python/default
+    steps:
+      - checkout
+      - run: chmod +x ./script/*.sh
+      - run: ./script/dependencies.sh
+      - run: ./script/build.sh
+      # - run: cppcheck SRC/
+      # - run: cmake -H. -Bbuild
+      # - run: cmake --build build
+      # - run: ./bin/point_test
+
+workflows:
+  main:
+    jobs:
+      - build-and-test
